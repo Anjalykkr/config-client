@@ -1,8 +1,18 @@
+server:
+  port: 8080
 spring:
   application:
     name: config-client
   config:
-    import: configserver:http://admin:secret@localhost:9090
+    import: optional:configserver:http://admin:secret@localhost:9090
+  cloud:
+    config:
+      fail-fast: true
+      retry:
+        initial-interval: 2000
+        max-attempts: 3
+        multiplier: 1.5
+        max-interval: 5000
 management:
   endpoints:
     web:
