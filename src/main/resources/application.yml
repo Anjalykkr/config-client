@@ -4,15 +4,7 @@ spring:
   application:
     name: config-client
   config:
-    import: optional:configserver:http://admin:secret@localhost:9090
-  cloud:
-    config:
-      fail-fast: true
-      retry:
-        initial-interval: 2000
-        max-attempts: 3
-        multiplier: 1.5
-        max-interval: 5000
+    import: optional:configserver:http://admin:secret@config-server:9090
 management:
   endpoints:
     web:
