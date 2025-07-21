@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: config-client
+  labels:
+    app: config-client
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: client-app
+  template:
+    metadata:
+      name: config-client
+      labels:
+        app: client-app
+    spec:
+      containers:
+        - name: config-client
+          image: anjalykkr/config-client:v1
+          ports:
+            - containerPort: 8080
+              name: config-client
+          env:
+            - name: SPRING_CONFIG_IMPORT
+              value: configserver:http://admin:secret@config-server:9090
+
